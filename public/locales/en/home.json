@@ -1,0 +1,14 @@
+{
+  "DEPLOY_INFORMATION": "INstantly deploy your Next.js site to a public URL with Vercel.",
+  "DEPLOY_TITLE": "Deploy",
+  "DOCUMENTATION_INFO": "FInd in -depth information about Next.js features adn API.",
+  "DOCUMENTATION_TITLE": "Documentation",
+  "EXAMPLE_INFORMATION": "Discover and deploy boilerplate example Next.js projects.",
+  "EXAMPLE_TITLE": "Examples",
+  "FOOTER_MSG": "Powered by ",
+  "LEARN_INFORMATION": "Learn about Next.js in an interactive course with quizzes!",
+  "LEARN_TITLE": "Learn",
+  "SECOND_PAGE": "This demo is for the second page. ",
+  "WELCOME_MSG": "Welcome to <Link>Next js !</Link>",
+  "WELCOME_MSG_HELPER_TEXT": "Get started by editing pages/index.js"
+}

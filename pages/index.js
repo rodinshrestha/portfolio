@@ -1,8 +1,20 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation, Trans } from "next-i18next";
+import { useRouter } from "next/router";
+import styles from "../styles/Home.module.css";
 
-export default function Home() {
+const Home = (props) => {
+  const { t } = useTranslation();
+  const router = useRouter();
+
+  const handleChange = (e) => {
+    const locale = e.target.value;
+    router.push("/", "/", { locale });
+  };
+
+  console.log(props);
   return (
     <div className={styles.container}>
       <Head>
@@ -13,41 +25,57 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          <Trans
+            defaults={t("home:WELCOME_MSG")}
+            components={{
+              Link: <a href="https://nextjs.org/docs" />,
+              bold: <strong />,
+            }}
+          />
         </h1>
+        <h2>Your language current language is:</h2>
+        <select
+          defaultValue={props._nextI18Next.initialLocale}
+          onChange={handleChange}
+        >
+          <option value="en">English</option>
+          <option value="ne">Nepali</option>
+          <option value="hi">Hindi</option>
+          <option value="ja">Japinese</option>
+          <option value="ur">Urdu</option>
+        </select>
+        <br />
+        <button onClick={() => router.push("/my")}>Go to Second page</button>
 
         <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
+          {t("home:WELCOME_MSG_HELPER_TEXT")}
         </p>
 
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
+            <h2>{t("home:DOCUMENTATION_TITLE")}&rarr;</h2>
+            <p>{t("home:DOCUMENTATION_INFO")}</p>
           </a>
 
           <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
+            <h2>{t("home:LEARN_TITLE")} &rarr;</h2>
+            <p>{t("home:LEARN_INFORMATION")}</p>
           </a>
 
           <a
             href="https://github.com/vercel/next.js/tree/canary/examples"
             className={styles.card}
           >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
+            <h2>{t("home:EXAMPLE_TITLE")} &rarr;</h2>
+            <p>{t("home:EXAMPLE_INFORMATION")}</p>
           </a>
 
           <a
             href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
             className={styles.card}
           >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
+            <h2>{t("home:DEPLOY_TITLE")} &rarr;</h2>
+            <p>{t("home:DEPLOY_INFORMATION")}</p>
           </a>
         </div>
       </main>
@@ -58,12 +86,22 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          {t("home:FOOTER_MSG")}
           <span className={styles.logo}>
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
         </a>
       </footer>
     </div>
-  )
+  );
+};
+
+export default Home;
+
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["home"])),
+    },
+  };
 }
