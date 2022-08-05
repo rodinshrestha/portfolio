@@ -1,0 +1,52 @@
+.hero_section {
+  color: #fff;
+  will-change: contents;
+  // opacity: 0;
+  animation: fadeIn 1s forwards;
+  animation-delay: 1s;
+
+  .text_zone {
+    position: absolute;
+    left: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+
+    h1 {
+      font-size: 53px;
+      margin: 0;
+      font-weight: 400;
+      position: relative;
+      &::before {
+        content: '<h1>';
+        position: absolute;
+        color: #ffd700;
+        font-size: 18px;
+        margin-top: -20px;
+        font-family: 'La Belle Aurore';
+        opacity: 0.6;
+        left: -15px;
+        animation: fadeIn 1s 1.7s backwards;
+      }
+      &::after {
+        content: '<h1/>';
+        font-family: 'La Belle Aurore';
+        position: absolute;
+        color: #ffd700;
+        font-size: 18px;
+        opacity: 0.6;
+        margin-top: 40px;
+        margin-left: 20px;
+        animation: fadeIn 1s 1.7s backwards;
+      }
+    }
+
+    h2 {
+      color: #8d8d8d;
+      margin-top: 20px;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 3px;
+      animation: fadeIn 1s 1.7s backwards;
+    }
+  }
+}
