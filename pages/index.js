@@ -29,7 +29,6 @@ const Home = (props) => {
             defaults={t("home:WELCOME_MSG")}
             components={{
               Link: <a href="https://nextjs.org/docs" />,
-              bold: <strong />,
             }}
           />
         </h1>
