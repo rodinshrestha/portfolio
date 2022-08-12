@@ -2,6 +2,7 @@
   "name": "i18n",
   "version": "0.1.0",
   "private": true,
+  "author": "Rodin Shrestha",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
