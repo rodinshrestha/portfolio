@@ -48,28 +48,22 @@ const HeroSection = () => {
     'r'
   ];
 
-  const [initialClass, setInitialClass] = React.useState('initial_animate');
-
-  React.useEffect(() => {
-    setTimeout(() => setInitialClass(''), 4000);
-  }, []);
-
   return (
     <Tags>
       <div className={styles.hero_section}>
         <div className={styles.text_zone}>
           <h1>
             {infoArray.map((char, i) => (
-              <AnimatedLetter char={char} key={i} idx={1 + i} renderClass={initialClass} />
+              <AnimatedLetter char={char} key={i} idx={1 + i} />
             ))}
             <br />
 
             {nameArray.map((char, i) => (
-              <AnimatedLetter char={char} key={i} idx={4 + i} renderClass={initialClass} />
+              <AnimatedLetter char={char} key={i} idx={4 + i} />
             ))}
             <br />
             {designation.map((char, i) => (
-              <AnimatedLetter char={char} key={i} idx={21 + i} renderClass={initialClass} />
+              <AnimatedLetter char={char} key={i} idx={21 + i} />
             ))}
           </h1>
 

@@ -8,18 +8,22 @@ import styles from './style.module.scss';
 interface IProps {
   char: string;
   idx: number;
-  renderClass: string;
+  // renderClass: string;
 }
 
-const AnimatedLetter = ({ char, idx, renderClass }: IProps) => {
+const AnimatedLetter = ({ char, idx }: IProps) => {
   const [mouseEntered, setMouseEntered] = React.useState(false);
+  const [state, setState] = React.useState('initial_animate');
 
   return (
     <span
-      className={clsx(styles.text_animate, `${styles['_' + idx]}`, styles[renderClass], {
+      className={clsx(styles.text_animate, `${styles['_' + idx]}`, styles[state], {
         text_animation: mouseEntered
       })}
-      onMouseEnter={() => setMouseEntered(true)}
+      onMouseEnter={() => {
+        setMouseEntered(true);
+        setState('');
+      }}
       onMouseLeave={() => setTimeout(() => setMouseEntered(false), 500)}>
       {convertSpecialString(char)}
     </span>
