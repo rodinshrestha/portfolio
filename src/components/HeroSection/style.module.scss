@@ -1,21 +1,24 @@
 .hero_section {
   color: #fff;
-  will-change: contents;
-  // opacity: 0;
-  animation: fadeIn 1s forwards;
-  animation-delay: 1s;
+  // will-change: contents;
+  // // opacity: 0;
+  // animation: fadeIn 1s forwards;
+  // animation-delay: 1s;
 
   .text_zone {
     position: absolute;
     left: 10%;
     top: 50%;
     transform: translateY(-50%);
+    width: 40%;
+    max-height: 90%;
 
     h1 {
-      font-size: 53px;
+      font-size: 56px;
       margin: 0;
       font-weight: 400;
-      position: relative;
+      // position: relative;
+      font-family: 'Coolvetica';
       &::before {
         content: '<h1>';
         position: absolute;
@@ -25,7 +28,6 @@
         font-family: 'La Belle Aurore';
         opacity: 0.6;
         left: -15px;
-        animation: fadeIn 1s 1.7s backwards;
       }
       &::after {
         content: '<h1/>';
@@ -45,6 +47,7 @@
       margin-top: 20px;
       font-weight: 400;
       font-size: 11px;
+      font-family: 'sans-serif';
       letter-spacing: 3px;
       animation: fadeIn 1s 1.7s backwards;
     }

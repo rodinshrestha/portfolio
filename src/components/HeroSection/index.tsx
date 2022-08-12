@@ -5,31 +5,75 @@ import Tags from '../Tags';
 import AnimatedLetter from '../AnimatedLetters';
 
 const HeroSection = () => {
-  const [letterClass, setLetterClass] = React.useState('text_animate');
+  const infoArray = ['H', 'i', ','];
+  const nameArray = [
+    'I',
+    '#m',
+    '',
+    'R',
+    'o',
+    'd',
+    'i',
+    'n',
+    ' ',
+    'S',
+    'h',
+    'r',
+    'e',
+    's',
+    't',
+    'h',
+    'a'
+  ];
+  const designation = [
+    'F',
+    'u',
+    'l',
+    'l',
+    ' ',
+    'S',
+    't',
+    'a',
+    'c',
+    'k',
+    ' ',
+    'D',
+    'e',
+    'v',
+    'e',
+    'l',
+    'o',
+    'p',
+    'e',
+    'r'
+  ];
 
-  const nameArray = ['R', 'o', 'd', 'i', 'n', ' ', 'S', 'h', 'r', 'e', 's', 't', 'h', 'a'];
-  const designation = ['W', 'e', 'b', ' ', 'D', 'e', 'v', 'e', 'l', 'o', 'p', 'e', 'r'];
+  const [initialClass, setInitialClass] = React.useState('initial_animate');
 
-  //   React.useEffect(() => {
-  //     setTimeout(() => {
-  //       setLetterClass('text-animate-hover');
-  //     });
-  //   }, []);
+  React.useEffect(() => {
+    setTimeout(() => setInitialClass(''), 4000);
+  }, []);
 
   return (
     <Tags>
       <div className={styles.hero_section}>
         <div className={styles.text_zone}>
           <h1>
-            Hi,
+            {infoArray.map((char, i) => (
+              <AnimatedLetter char={char} key={i} idx={1 + i} renderClass={initialClass} />
+            ))}
             <br />
-            I'm <AnimatedLetter letterClass={letterClass} strArray={nameArray} idx={15} />
-            {/* I'm Rodin Shrestha */}
+
+            {nameArray.map((char, i) => (
+              <AnimatedLetter char={char} key={i} idx={4 + i} renderClass={initialClass} />
+            ))}
             <br />
-            <AnimatedLetter letterClass={letterClass} strArray={designation} idx={15} />
+            {designation.map((char, i) => (
+              <AnimatedLetter char={char} key={i} idx={21 + i} renderClass={initialClass} />
+            ))}
           </h1>
 
-          <h2>Frontend Developer / React JS / Next Js</h2>
+          <h2>React JS / Next Js / Typescript JS / Node JS </h2>
         </div>
       </div>
     </Tags>

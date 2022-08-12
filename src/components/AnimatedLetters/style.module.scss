@@ -1,14 +1,24 @@
-// .text_animate {
-//   display: inline-block;
-//   //   opacity: 0;
-//   animation: bounceIn 1s 1s;
-//   animation-fill-mode: forwards;
-//   min-width: 10px;
-// }
+.text_animate {
+  display: inline-block;
+  cursor: context-menu;
 
-// @for $i from 1 through 35 {
-//   .text_animate._#{$i} {
-//     display: none;
-//     animation-delay: #{$i / 10}s;
-//   }
-// }
+  min-width: 10px;
+  &:hover {
+    color: #ffd700;
+  }
+}
+
+.initial_animate {
+  opacity: 0;
+  animation: 'bounceIn';
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  transition: all 0.2s ease-in-out;
+}
+
+@for $i from 1 through 40 {
+  ._#{$i} {
+    animation-delay: #{$i / 10}s;
+  }
+}
