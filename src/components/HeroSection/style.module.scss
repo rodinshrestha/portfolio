@@ -7,6 +7,9 @@
     position: relative;
     width: 65%;
     height: 100%;
+    @media (max-width: 1024px) {
+      width: 100%;
+    }
   }
   .skill_show_case_container {
     position: relative;
@@ -16,5 +19,10 @@
     align-items: center;
     flex-direction: column;
     animation: 'fadeIn' 1s 4.5s backwards;
+    @media (max-width: 1024px) {
+      display: none;
+      animation-delay: 0 !important;
+      animation: 'fadeIn' 0.1s 0.5s forwards;
+    }
   }
 }

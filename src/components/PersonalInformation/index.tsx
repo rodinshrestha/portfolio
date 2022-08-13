@@ -1,16 +1,23 @@
 import React from 'react';
+import { Box, useColorModeValue, useColorMode } from '@chakra-ui/react';
+import { Button, ButtonGroup } from '@chakra-ui/react';
+import { ArrowDownIcon } from '@chakra-ui/icons';
 
-import Tags from '@/components/Tags';
-import AnimatedLetter from '../AnimatedLetters';
 import { infoArray, nameArray, designation } from '@/utils/personalInformation';
+import Tags from '@/components/Tags';
 
-import styles from './style.module.scss';
+import AnimatedLetter from '../AnimatedLetters';
+
+import { StyledDiv } from './style';
+
 const PersonalInformation = () => {
+  const { colorMode } = useColorMode();
+
   return (
     <Tags>
-      <div className={styles.personal_information_container}>
-        <div className={styles.text_zone}>
-          <h1>
+      <StyledDiv className="personal_information_container" data-color-mode={colorMode}>
+        <Box as="div" className="text_zone">
+          <Box as="h1">
             {infoArray.map((char, i) => (
               <AnimatedLetter char={char} key={i} idx={1 + i} />
             ))}
@@ -23,11 +30,24 @@ const PersonalInformation = () => {
             {designation.map((char, i) => (
               <AnimatedLetter char={char} key={i} idx={21 + i} />
             ))}
-          </h1>
+          </Box>
 
-          <h2>React JS / Next Js / Typescript JS / Node JS / MongoDB </h2>
-        </div>
-      </div>
+          <Box as="h2" color={useColorModeValue('#8d8d8d', '#A9A9A9')}>
+            React JS / Next Js / Typescript JS / Node JS / MongoDB{' '}
+          </Box>
+          <Button
+            as="button"
+            mt={5}
+            size="lg"
+            variant="outline"
+            rightIcon={<ArrowDownIcon />}
+            iconSpacing={4}
+            _hover={{ bgColor: 'none' }}
+            className="download-btn">
+            Resume
+          </Button>
+        </Box>
+      </StyledDiv>
     </Tags>
   );
 };

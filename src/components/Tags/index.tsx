@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import React from 'react';
+import { Box, useColorModeValue } from '@chakra-ui/react';
 
 import styles from './style.module.scss';
 
@@ -9,25 +10,33 @@ interface Props {
 
 const Tags = ({ children }: Props) => {
   return (
-    <div className={styles.tag_container}>
-      <span className={clsx(styles.tags, styles.top_tags)}>
-        <span>&lt;html&gt;</span>
+    <Box as="div" className={styles.tag_container}>
+      <Box
+        as="span"
+        className={clsx(styles.tags, styles.top_tags)}
+        color={useColorModeValue('#8d8d8d', '#ffd700')}>
+        <Box as="span">&lt;html&gt;</Box>
         <br />
-        <span>
+        <Box as="span">
           &lt;head \&gt;
           <br />
-        </span>
+        </Box>
         &lt;body&gt;
-      </span>
+      </Box>
 
       {children}
 
-      <span className={clsx(styles.tags, styles.bottom_tags)}>
+      <Box
+        as="span"
+        className={clsx(styles.tags, styles.bottom_tags)}
+        color={useColorModeValue('#8d8d8d', '#ffd700')}>
         &lt;/ body&gt;
         <br />
-        <span className={clsx(styles.bottom_tag_html)}>&lt;/html&gt;</span>
-      </span>
-    </div>
+        <Box as="span" className={clsx(styles.bottom_tag_html)}>
+          &lt;/html&gt;
+        </Box>
+      </Box>
+    </Box>
   );
 };
 

@@ -1,4 +1,5 @@
 export const infoArray = ['H', 'i', ','];
+export const name = ['R', 'O', 'D', 'I', 'N', '  ', 'S', 'H', 'R', 'E', 'S', 'T', 'H', 'A'];
 export const nameArray = [
   'I',
   '#m',

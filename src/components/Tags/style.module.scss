@@ -6,9 +6,9 @@
 
   .tags {
     position: absolute;
-    bottom: 50px;
-    left: 50px;
-    color: #ffd700;
+    bottom: 40px;
+    // left: 50px;
+    // color: #ffd700;
     font-size: 18px;
     font-family: 'La Belle Aurore';
     animation: fadeIns 1s forwards;
@@ -16,16 +16,11 @@
 
   .top_tags {
     bottom: auto;
-    top: 35px;
+    top: 70px;
   }
 
   .bottom_tags {
-    animation: fadeIns 1s 4.2s backwards;
-    opacity: 0.6;
-  }
-
-  .bottom_tags_html {
-    left: -20px;
+    animation: fadeIns 0.1s 4.2s both;
   }
 }
 @keyframes fadeIns {

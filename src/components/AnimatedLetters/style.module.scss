@@ -1,10 +1,12 @@
 .text_animate {
   display: inline-block;
   cursor: context-menu;
+  letter-spacing: 1px;
   min-width: 10px;
-  &:hover {
-    color: #ffd700;
-  }
+  // &:hover {
+  //   // color: #ffd700;
+  //   // color: inherit;
+  // }
 }
 
 .initial_animate {

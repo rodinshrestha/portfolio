@@ -1,5 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
+import { Box, useColorModeValue } from '@chakra-ui/react';
 
 import { convertSpecialString } from '@/utils/convertSpecialString';
 
@@ -16,17 +17,19 @@ const AnimatedLetter = ({ char, idx }: IProps) => {
   const [state, setState] = React.useState('initial_animate');
 
   return (
-    <span
+    <Box
+      as="span"
       className={clsx(styles.text_animate, `${styles['_' + idx]}`, styles[state], {
         text_animation: mouseEntered
       })}
+      _hover={{ color: useColorModeValue('#A9A9A9', '#ffd700'), opacity: 0.8 }}
       onMouseEnter={() => {
         setMouseEntered(true);
         setState('');
       }}
       onMouseLeave={() => setTimeout(() => setMouseEntered(false), 500)}>
       {convertSpecialString(char)}
-    </span>
+    </Box>
   );
 };
 
