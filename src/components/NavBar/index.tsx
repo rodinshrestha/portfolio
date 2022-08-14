@@ -20,6 +20,7 @@ import ThemeToggle from '../ThemeToggle';
 import IconButton from '@/components/IconButton';
 import AnimatedLetter from '../AnimatedLetters';
 import { name } from '@/utils/personalInformation';
+import Logo from '../Logo';
 
 const Navbar = () => {
   const { colorMode } = useColorMode();
@@ -42,10 +43,10 @@ const Navbar = () => {
         alignItems="center">
         <Flex align="center" mr={5} flexGrow={1}>
           <Heading as="h1" size="md">
-            {/* RODIN SHRESTHA */}
-            {name.map((char, i) => (
+            <Logo />
+            {/* {name.map((char, i) => (
               <AnimatedLetter char={char} key={i} idx={1 + i} />
-            ))}
+            ))} */}
           </Heading>
         </Flex>
 
@@ -59,16 +60,19 @@ const Navbar = () => {
           flexGrow={1}
           mt={{ base: 4, nmd: 0 }}>
           <Tooltip label="send a mail" hasArrow shouldWrapChildren>
-            <IconButton icon={<GrMail />} />
+            <IconButton icon={<GrMail />} href="mailto: rodinshrestha@gmail.com" />
           </Tooltip>
           <Tooltip label="LinkedIn link" hasArrow shouldWrapChildren>
-            <IconButton icon={<FaLinkedin />} />
+            <IconButton
+              icon={<FaLinkedin />}
+              href="https://np.linkedin.com/in/rodin-shrestha-074aa417a"
+            />
           </Tooltip>
           <Tooltip label="Github Link" hasArrow shouldWrapChildren>
-            <IconButton icon={<FaGithubAlt />} />
+            <IconButton icon={<FaGithubAlt />} href="https://github.com/rodinshrestha" />
           </Tooltip>
-          <Tooltip label="Dowload my resume for more information" hasArrow shouldWrapChildren>
-            <IconButton icon={<FaDownload />} />
+          <Tooltip label="Dowload my resume to know me more" hasArrow shouldWrapChildren>
+            <IconButton icon={<FaDownload />} href="#" />
           </Tooltip>
           <Tooltip
             label={`Switch to ${colorMode === 'dark' ? 'light' : 'dark'}`}
@@ -77,7 +81,7 @@ const Navbar = () => {
             <ThemeToggle />
           </Tooltip>
         </Stack>
-        <Box
+        {/* <Box
           flex={1}
           alignItems="right"
           display={{ base: 'flex', md: 'none' }}
@@ -100,7 +104,7 @@ const Navbar = () => {
               </MenuList>
             </Menu>
           </Box>
-        </Box>
+        </Box> */}
       </Container>
     </Box>
   );
