@@ -33,7 +33,7 @@ const PersonalInformation = () => {
           </Box>
 
           <Box as="h2" color={useColorModeValue('#8d8d8d', '#A9A9A9')}>
-            React JS / Next Js / Typescript JS / Node JS / MongoDB{' '}
+            React JS / Next Js / Typescript / Node JS / MongoDB{' '}
           </Box>
           <Button
             as="button"
