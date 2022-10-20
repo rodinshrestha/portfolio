@@ -24,9 +24,21 @@ import { saveToLocalStorage } from '@/utils/localstorage';
 
 const Login = () => {
   const toast = useToast();
+  const [count, setCount] = React.useState(0);
   const ref: any = React.useRef();
 
-  const { handleChange, handleSubmit, errors, values, touched, isSubmitting } = useFormik({
+  const countRef = React.useRef(0);
+
+  const {
+    handleChange,
+    handleSubmit,
+    errors,
+    values,
+    touched,
+    isSubmitting,
+    dirty,
+    setFieldTouched
+  } = useFormik({
     initialValues: {
       email: '',
       password: ''
@@ -48,10 +60,18 @@ const Login = () => {
         })
   });
 
-  const handleMouseEnter = (error: any, touched: any) => {
-    console.log(error, touched);
-    if (!Object.keys(error).length) return;
+  const handleMouseEnter = (error: any, handleSubmit: any) => {
+    if (!dirty) handleSubmit();
+    if (!Object.keys(error).length) {
+      console.log('i am here');
+      // countRef.current = 0;
+      setCount(0);
+      return;
+    }
+    // countRef.current++;
+    setCount((prev) => prev + 1);
 
+    // touched();
     const { justifyContent } = ref.current.style;
 
     if (justifyContent) {
@@ -62,7 +82,8 @@ const Login = () => {
     }
   };
 
-  // console.log(errors);
+  console.log(count);
+  const errMsg = "Ain't you tired my friend? why don't u try to fill the form properly?";
 
   return (
     <Container maxW="lg" py={{ base: '12', md: '24' }} px={{ base: '0', sm: '8' }}>
@@ -70,7 +91,7 @@ const Login = () => {
         <Stack display="flex" flexDirection="column" gap={6} alignItems="center">
           <Avatar />
 
-          <Heading>Welcome</Heading>
+          <Heading>{count > 5 ? errMsg : 'welcome'}</Heading>
         </Stack>
         <Box
           py={{ base: '0', sm: '8' }}
@@ -88,6 +109,7 @@ const Login = () => {
                 value={values.email}
                 onChange={handleChange}
                 touched={touched.email}
+                dirty={!values.email ? true : dirty}
               />
               <Input
                 name="password"
@@ -97,6 +119,7 @@ const Login = () => {
                 value={values.password}
                 onChange={handleChange}
                 touched={touched.password}
+                dirty={!values.password ? true : dirty}
               />
             </Stack>
             <Box display="flex" justifyContent="flex-end" ref={ref}>
@@ -107,7 +130,7 @@ const Login = () => {
                 variant="solid"
                 colorScheme="teal"
                 width="50%"
-                onMouseEnter={() => handleMouseEnter(errors, touched)}
+                onMouseEnter={() => handleMouseEnter(errors, handleSubmit)}
                 loadingText="Loggingin..."
                 disabled={isSubmitting}
                 mt={6}>

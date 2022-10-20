@@ -15,12 +15,13 @@ interface IProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   error: string | undefined;
   touched: boolean | undefined;
+  dirty: boolean;
 }
 
-const Input = ({ type, label, value, onChange, name, error, touched }: IProps) => {
-  console.log({ error, case: !!error && label !== 'email' ? true : !!touched });
+const Input = ({ type, label, value, onChange, name, error, touched, dirty }: IProps) => {
+  // console.log({ error });
   return (
-    <FormControl isInvalid={!!error}>
+    <FormControl isInvalid={!!error && !!touched && dirty}>
       {label && <FormLabel htmlFor={label}>{ucFirst(label)}</FormLabel>}
       <ChakraInput id={type} type={type} value={value} onChange={onChange} name={name} />
       {error && <FormErrorMessage>{error}</FormErrorMessage>}
