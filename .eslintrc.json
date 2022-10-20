@@ -17,17 +17,22 @@
         "newlines-between": "always",
         "pathGroups": [
           {
-            "pattern": "react",
-            "group": "builtin",
-            "position": "before"
-          },
-          {
-            "pattern": "@/**",
+            "pattern": "~/**",
             "group": "external",
             "position": "after"
           }
         ],
-        "pathGroupsExcludedImportTypes": ["react"]
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "unknown",
+          "parent",
+          "sibling",
+          "index",
+          "object",
+          "type"
+        ]
       }
     ]
   },
