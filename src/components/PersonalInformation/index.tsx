@@ -36,14 +36,16 @@ const PersonalInformation = () => {
             React JS / Next Js / Typescript / Node JS / MongoDB{' '}
           </Box>
           <Button
-            as="button"
+            as="a"
             mt={5}
             size="lg"
             variant="outline"
             rightIcon={<ArrowDownIcon />}
             iconSpacing={4}
             _hover={{ bgColor: 'none' }}
-            className="download-btn">
+            className="download-btn"
+            href="/assets/my-cv.pdf"
+            download>
             Resume
           </Button>
         </Box>

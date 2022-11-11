@@ -72,7 +72,7 @@ const Navbar = () => {
             <IconButton icon={<FaGithubAlt />} href="https://github.com/rodinshrestha" />
           </Tooltip>
           <Tooltip label="Dowload my resume to know me more" hasArrow shouldWrapChildren>
-            <IconButton icon={<FaDownload />} href="#" />
+            <IconButton icon={<FaDownload />} href="/assets/my-cv.pdf" download />
           </Tooltip>
           <Tooltip
             label={`Switch to ${colorMode === 'dark' ? 'light' : 'dark'}`}
