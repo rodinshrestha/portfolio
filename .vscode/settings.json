@@ -1,5 +1,14 @@
+// {
+//   "editor.defaultFormatter": "esbenp.prettier-vscode",
+//   "editor.formatOnSave": true,
+//   "files.associations": { "*.css": "tailwindcss" }
+
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "files.associations": { "*.css": "tailwindcss" }
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+    // "source.organizeImports": true,
+    // "source.sortMembers": true
+  }
 }

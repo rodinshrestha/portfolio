@@ -1,9 +1,9 @@
-import React from 'react';
-import { useRouter } from 'next/router';
+import React from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import { Center, Flex } from "@chakra-ui/react";
 
-import Link from 'next/link';
-import { Box, Center, Flex, Heading, HStack, Image, Skeleton, Text } from '@chakra-ui/react';
-import { route } from '@/config/route';
+import { route } from "@/config/route";
 
 const Sidebar = () => {
   const { pathname } = useRouter();
@@ -24,9 +24,10 @@ const Sidebar = () => {
       zIndex="30"
       transition="transform 0.1s"
       transform={{
-        base: 'translateX(0)',
-        md: 'none'
-      }}>
+        base: "translateX(0)",
+        md: "none",
+      }}
+    >
       <Center minH="14" p="4" mb="2" flexDirection="column" flexShrink={0}>
         Rodin shrestha
       </Center>
@@ -39,12 +40,13 @@ const Sidebar = () => {
                 <Flex
                   minH="12"
                   alignItems="center"
-                  _hover={{ color: 'white', bg: 'blackAlpha.300' }}
-                  textColor={activeTab ? 'white' : 'whiteAlpha.800'}
-                  bgColor={activeTab ? 'blackAlpha.500' : 'transparent'}
+                  _hover={{ color: "white", bg: "blackAlpha.300" }}
+                  textColor={activeTab ? "white" : "whiteAlpha.800"}
+                  bgColor={activeTab ? "blackAlpha.500" : "transparent"}
                   px="4"
                   borderRadius="lg"
-                  _activeLink={{ bg: 'blackAlpha.500', textColor: 'white' }}>
+                  _activeLink={{ bg: "blackAlpha.500", textColor: "white" }}
+                >
                   <Center fontSize="xl" mr="3">
                     {x.icon}
                   </Center>

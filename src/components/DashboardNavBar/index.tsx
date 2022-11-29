@@ -1,6 +1,5 @@
-import { Flex, IconButton, Box } from '@chakra-ui/react';
-import React from 'react';
-import { RiNotification3Fill } from 'react-icons/ri';
+import { Flex, IconButton } from "@chakra-ui/react";
+import { RiNotification3Fill } from "react-icons/ri";
 
 const DashboardNavbar = () => {
   return (
@@ -11,7 +10,8 @@ const DashboardNavbar = () => {
       px="6"
       alignItems="center"
       bg="white"
-      justifyContent="flex-end">
+      justifyContent="flex-end"
+    >
       <IconButton
         variant=""
         colorScheme="blue"

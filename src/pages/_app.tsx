@@ -1,35 +1,28 @@
-import { AppProps } from 'next/app';
-import { ChakraProvider } from '@chakra-ui/react';
-import theme from '../../theme';
-import 'animate.css';
-import Head from 'next/head';
+import React from "react";
+import { ChakraProvider } from "@chakra-ui/react";
+import "animate.css";
+import { AppProps } from "next/app";
+import Head from "next/head";
+import { useRouter } from "next/router";
 
-import '../styles/globals.scss';
-import { useRouter } from 'next/router';
-import React from 'react';
-import { getFromLocalStorage } from '@/utils/localstorage';
-import { checkAuthenticatedRoute } from '@/utils/check-authenticated-route';
+import { checkAuthenticatedRoute } from "@/utils/check-authenticated-route";
+import { getFromLocalStorage } from "@/utils/localstorage";
+
+import theme from "../../theme";
+import "../styles/globals.scss";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [loader, setLoader] = React.useState(false);
   const router = useRouter();
 
   React.useEffect(() => {
     const isProtectedRoute = checkAuthenticatedRoute(router.pathname);
     if (isProtectedRoute) {
-      const token = getFromLocalStorage('token');
+      const token = getFromLocalStorage("token");
       if (!token) {
-        router.push('/login');
-        return;
+        router.push("/login");
       }
     }
-  }, [router.pathname]);
-
-  // const router = useRouter();
-
-  // React.useEffect(() => {
-  //   if (!getFromLocalStorage('token')) router.push('/login');
-  // }, []);
+  }, [router]);
 
   return (
     <>

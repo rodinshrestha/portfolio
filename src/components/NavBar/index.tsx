@@ -4,23 +4,17 @@ import {
   Stack,
   Heading,
   Flex,
-  Menu,
-  MenuItem,
-  MenuList,
-  MenuButton,
   Tooltip,
   useColorMode,
-  useColorModeValue
-} from '@chakra-ui/react';
-import { HamburgerIcon } from '@chakra-ui/icons';
-import { FaLinkedin, FaGithubAlt, FaDownload } from 'react-icons/fa';
-import { GrMail } from 'react-icons/gr';
+  useColorModeValue,
+} from "@chakra-ui/react";
+import { FaLinkedin, FaGithubAlt, FaDownload } from "react-icons/fa";
+import { GrMail } from "react-icons/gr";
 
-import ThemeToggle from '../ThemeToggle';
-import IconButton from '@/components/IconButton';
-import AnimatedLetter from '../AnimatedLetters';
-import { name } from '@/utils/personalInformation';
-import Logo from '../Logo';
+import IconButton from "@/components/IconButton";
+
+import ThemeToggle from "../ThemeToggle";
+import Logo from "../Logo";
 
 const Navbar = () => {
   const { colorMode } = useColorMode();
@@ -29,9 +23,10 @@ const Navbar = () => {
       position="fixed"
       as="nav"
       w="100%"
-      bg={useColorModeValue('#ffffff40', '#20202380')}
-      style={{ backdropFilter: 'blur(10px)' }}
-      zIndex={1}>
+      bg={useColorModeValue("#ffffff40", "#20202380")}
+      style={{ backdropFilter: "blur(10px)" }}
+      zIndex={1}
+    >
       <Container
         display="flex"
         // px={20}
@@ -40,7 +35,8 @@ const Navbar = () => {
         flexWrap="wrap"
         justifyContent="space-between"
         maxW="1920px"
-        alignItems="center">
+        alignItems="center"
+      >
         <Flex align="center" mr={5} flexGrow={1}>
           <Heading as="h1" size="md">
             <Logo />
@@ -52,15 +48,19 @@ const Navbar = () => {
 
         {/* <ThemeToggle /> */}
         <Stack
-          direction={{ base: 'column', md: 'row' }}
-          display={{ base: 'none', md: 'flex' }}
-          width={{ md: 'auto' }}
+          direction={{ base: "column", md: "row" }}
+          display={{ base: "none", md: "flex" }}
+          width={{ md: "auto" }}
           alignItems="center"
           justifyContent="flex-end"
           flexGrow={1}
-          mt={{ base: 4, nmd: 0 }}>
+          mt={{ base: 4, nmd: 0 }}
+        >
           <Tooltip label="send a mail" hasArrow shouldWrapChildren>
-            <IconButton icon={<GrMail />} href="mailto: rodinshrestha@gmail.com" />
+            <IconButton
+              icon={<GrMail />}
+              href="mailto: rodinshrestha@gmail.com"
+            />
           </Tooltip>
           <Tooltip label="LinkedIn link" hasArrow shouldWrapChildren>
             <IconButton
@@ -69,15 +69,27 @@ const Navbar = () => {
             />
           </Tooltip>
           <Tooltip label="Github Link" hasArrow shouldWrapChildren>
-            <IconButton icon={<FaGithubAlt />} href="https://github.com/rodinshrestha" />
-          </Tooltip>
-          <Tooltip label="Dowload my resume to know me more" hasArrow shouldWrapChildren>
-            <IconButton icon={<FaDownload />} href="/assets/my-cv.pdf" download />
+            <IconButton
+              icon={<FaGithubAlt />}
+              href="https://github.com/rodinshrestha"
+            />
           </Tooltip>
           <Tooltip
-            label={`Switch to ${colorMode === 'dark' ? 'light' : 'dark'}`}
+            label="Dowload my resume to know me more"
             hasArrow
-            shouldWrapChildren>
+            shouldWrapChildren
+          >
+            <IconButton
+              icon={<FaDownload />}
+              href="/assets/my-cv.pdf"
+              download
+            />
+          </Tooltip>
+          <Tooltip
+            label={`Switch to ${colorMode === "dark" ? "light" : "dark"}`}
+            hasArrow
+            shouldWrapChildren
+          >
             <ThemeToggle />
           </Tooltip>
         </Stack>

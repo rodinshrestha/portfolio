@@ -1,5 +1,5 @@
-import { Box, useColorModeValue } from '@chakra-ui/react';
 import React from 'react';
+import { Box, useColorModeValue } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 
 const Logo = () => {

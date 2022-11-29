@@ -1,15 +1,17 @@
-import axios from 'axios';
-import type { AxiosRequestConfig } from 'axios';
-import { getFromLocalStorage } from './localstorage';
+import axios from "axios";
+import type { AxiosRequestConfig } from "axios";
+
+import { getFromLocalStorage } from "./localstorage";
 
 export const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
-  timeout: 2500
+  timeout: 2500,
 });
 
 instance.interceptors.request.use(
   (config: AxiosRequestConfig) => {
-    config.headers!.Authorization = getFromLocalStorage('token');
+    config.headers = config.headers ?? {};
+    config.headers.Authorization = getFromLocalStorage("token");
     return config;
   },
   (error) => {

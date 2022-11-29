@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Box,
   Button,
@@ -12,22 +13,20 @@ import {
   Stack,
   // Text,
   useBreakpointValue,
-  useColorModeValue
-} from '@chakra-ui/react';
-import useToast from '@/hooks/useToast';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import Input from '@/components/Input';
-import React from 'react';
-import axios from '@/utils/axios';
-import { saveToLocalStorage } from '@/utils/localstorage';
+  useColorModeValue,
+} from "@chakra-ui/react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
+import Input from "@/components/Input";
+import useToast from "@/hooks/useToast";
+import axios from "@/utils/axios";
+import { saveToLocalStorage } from "@/utils/localstorage";
 
 const Login = () => {
   const toast = useToast();
   const [count, setCount] = React.useState(0);
   const ref: any = React.useRef();
-
-  const countRef = React.useRef(0);
 
   const {
     handleChange,
@@ -37,33 +36,32 @@ const Login = () => {
     touched,
     isSubmitting,
     dirty,
-    setFieldTouched
   } = useFormik({
     initialValues: {
-      email: '',
-      password: ''
+      email: "",
+      password: "",
     },
     enableReinitialize: true,
     validationSchema: Yup.object().shape({
-      email: Yup.string().email('not a valid email').required('is required'), //.email(` must be a valid email address.`),
-      password: Yup.string().required('is required')
+      email: Yup.string().email("not a valid email").required("is required"), //.email(` must be a valid email address.`),
+      password: Yup.string().required("is required"),
     }),
     onSubmit: (values) =>
       axios
-        .post('/user/login', { ...values })
+        .post("/user/login", { ...values })
         .then((res) => {
-          saveToLocalStorage('token', res.data.token);
-          toast.success('success', `Logged in`);
+          saveToLocalStorage("token", res.data.token);
+          toast.success("success", `Logged in`);
         })
         .catch((e) => {
-          toast.failed('Failed', e?.response.data || 'Internal server error');
-        })
+          toast.failed("Failed", e?.response.data || "Internal server error");
+        }),
   });
 
   const handleMouseEnter = (error: any, handleSubmit: any) => {
     if (!dirty) handleSubmit();
     if (!Object.keys(error).length) {
-      console.log('i am here');
+      console.log("i am here");
       // countRef.current = 0;
       setCount(0);
       return;
@@ -76,29 +74,40 @@ const Login = () => {
 
     if (justifyContent) {
       ref.current.style.justifyContent =
-        justifyContent === 'flex-start' ? 'flex-end' : 'flex-start';
+        justifyContent === "flex-start" ? "flex-end" : "flex-start";
     } else {
-      ref.current.style.justifyContent = 'flex-start';
+      ref.current.style.justifyContent = "flex-start";
     }
   };
 
   console.log(count);
-  const errMsg = "Ain't you tired my friend? why don't u try to fill the form properly?";
+  const errMsg =
+    "Ain't you tired my friend? why don't u try to fill the form properly?";
 
   return (
-    <Container maxW="lg" py={{ base: '12', md: '24' }} px={{ base: '0', sm: '8' }}>
+    <Container
+      maxW="lg"
+      py={{ base: "12", md: "24" }}
+      px={{ base: "0", sm: "8" }}
+    >
       <Stack spacing="8">
-        <Stack display="flex" flexDirection="column" gap={6} alignItems="center">
+        <Stack
+          display="flex"
+          flexDirection="column"
+          gap={6}
+          alignItems="center"
+        >
           <Avatar />
 
-          <Heading>{count > 5 ? errMsg : 'welcome'}</Heading>
+          <Heading>{count > 5 ? errMsg : "welcome"}</Heading>
         </Stack>
         <Box
-          py={{ base: '0', sm: '8' }}
-          px={{ base: '4', sm: '10' }}
-          bg={useBreakpointValue({ base: 'transparent', sm: 'bg-surface' })}
-          boxShadow={{ base: 'none', sm: useColorModeValue('md', 'md-dark') }}
-          borderRadius={{ base: 'none', sm: 'xl' }}>
+          py={{ base: "0", sm: "8" }}
+          px={{ base: "4", sm: "10" }}
+          bg={useBreakpointValue({ base: "transparent", sm: "bg-surface" })}
+          boxShadow={{ base: "none", sm: useColorModeValue("md", "md-dark") }}
+          borderRadius={{ base: "none", sm: "xl" }}
+        >
           <form onSubmit={handleSubmit}>
             <Stack spacing="5">
               <Input
@@ -133,7 +142,8 @@ const Login = () => {
                 onMouseEnter={() => handleMouseEnter(errors, handleSubmit)}
                 loadingText="Loggingin..."
                 disabled={isSubmitting}
-                mt={6}>
+                mt={6}
+              >
                 Login
               </Button>
             </Box>

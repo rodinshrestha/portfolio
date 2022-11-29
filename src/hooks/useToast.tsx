@@ -1,24 +1,24 @@
-import { useToast as useChakraToast } from '@chakra-ui/react';
+import { useToast as useChakraToast } from "@chakra-ui/react";
 
-interface Itoast {
-  title: string;
-  description: string;
-}
+// interface Itoast {
+//   title: string;
+//   description: string;
+// }
 
 const useToast = () => {
   const toast = useChakraToast();
 
   const defaultProperties = {
     duration: 5000,
-    isClosable: true
+    isClosable: true,
   };
 
   const success = (title: string, description: string) => {
     toast({
       title: title,
       description: description,
-      status: 'success',
-      ...defaultProperties
+      status: "success",
+      ...defaultProperties,
     });
   };
 
@@ -26,8 +26,8 @@ const useToast = () => {
     toast({
       title: title,
       description: description,
-      status: 'error',
-      ...defaultProperties
+      status: "error",
+      ...defaultProperties,
     });
   };
 

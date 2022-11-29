@@ -1,21 +1,24 @@
-import React from 'react';
-import { Box, useColorModeValue, useColorMode } from '@chakra-ui/react';
-import { Button, ButtonGroup } from '@chakra-ui/react';
-import { ArrowDownIcon } from '@chakra-ui/icons';
+import React from "react";
+import { Box, useColorModeValue, useColorMode } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
+import { ArrowDownIcon } from "@chakra-ui/icons";
 
-import { infoArray, nameArray, designation } from '@/utils/personalInformation';
-import Tags from '@/components/Tags';
+import { infoArray, nameArray, designation } from "@/utils/personalInformation";
+import Tags from "@/components/Tags";
 
-import AnimatedLetter from '../AnimatedLetters';
+import AnimatedLetter from "../AnimatedLetters";
 
-import { StyledDiv } from './style';
+import { StyledDiv } from "./style";
 
 const PersonalInformation = () => {
   const { colorMode } = useColorMode();
 
   return (
     <Tags>
-      <StyledDiv className="personal_information_container" data-color-mode={colorMode}>
+      <StyledDiv
+        className="personal_information_container"
+        data-color-mode={colorMode}
+      >
         <Box as="div" className="text_zone">
           <Box as="h1">
             {infoArray.map((char, i) => (
@@ -32,8 +35,8 @@ const PersonalInformation = () => {
             ))}
           </Box>
 
-          <Box as="h2" color={useColorModeValue('#8d8d8d', '#A9A9A9')}>
-            React JS / Next Js / Typescript / Node JS / MongoDB{' '}
+          <Box as="h2" color={useColorModeValue("#8d8d8d", "#A9A9A9")}>
+            React JS / Next Js / Typescript / Node JS / MongoDB{" "}
           </Box>
           <Button
             as="a"
@@ -42,10 +45,11 @@ const PersonalInformation = () => {
             variant="outline"
             rightIcon={<ArrowDownIcon />}
             iconSpacing={4}
-            _hover={{ bgColor: 'none' }}
+            _hover={{ bgColor: "none" }}
             className="download-btn"
             href="/assets/my-cv.pdf"
-            download>
+            download
+          >
             Resume
           </Button>
         </Box>
