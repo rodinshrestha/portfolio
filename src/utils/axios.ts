@@ -5,7 +5,7 @@ import { getFromLocalStorage } from "./localstorage";
 
 export const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
-  timeout: 2500,
+  // timeout: 2500,
 });
 
 instance.interceptors.request.use(

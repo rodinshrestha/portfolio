@@ -1,7 +1,24 @@
-import { Flex, IconButton } from "@chakra-ui/react";
+import React from "react";
+import { Badge, Flex, IconButton } from "@chakra-ui/react";
 import { RiNotification3Fill } from "react-icons/ri";
 
+import useSocket from "@/hooks/useSocket";
+
 const DashboardNavbar = () => {
+  const [notification, setNotification] = React.useState<any>([]);
+
+  const { socket } = useSocket();
+
+  React.useEffect(() => {
+    socket?.on("getNotification", (msg: any) =>
+      setNotification((prev: any) => [...prev, msg])
+    );
+
+    return () => socket.off();
+  }, [socket]);
+
+  console.log(notification);
+
   return (
     <Flex
       position="relative"
@@ -22,6 +39,7 @@ const DashboardNavbar = () => {
         icon={<RiNotification3Fill />}
         // onClick={() => setShowSidebar(!showSidebar)}
       />
+      <Badge>{notification.length}</Badge>
     </Flex>
   );
 };

@@ -1,5 +1,8 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
+import Router from "next/router";
+
+import useAuth from "@/hooks/useAuth";
 
 import DashboardNavbar from "../DashboardNavBar";
 import Sidebar from "../Sidebar";
@@ -9,6 +12,16 @@ interface IProps {
 }
 
 const BaseLayout = ({ children }: IProps) => {
+  const { email, loader } = useAuth();
+
+  React.useEffect(() => {
+    if (!email && !loader) {
+      Router.push("/login");
+    }
+  }, [email, loader]);
+
+  if (loader) return <div>loading</div>;
+
   return (
     <Box display="flex" width="100vw" height="100vh">
       <Sidebar />

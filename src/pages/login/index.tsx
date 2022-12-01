@@ -1,17 +1,12 @@
 import React from "react";
+import { useRouter } from "next/router";
 import {
   Box,
   Button,
-  // Checkbox,
   Container,
-  // Divider,
-  // FormControl,
-  // FormLabel,
   Heading,
-  // HStack,
   Avatar,
   Stack,
-  // Text,
   useBreakpointValue,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -22,11 +17,24 @@ import Input from "@/components/Input";
 import useToast from "@/hooks/useToast";
 import axios from "@/utils/axios";
 import { saveToLocalStorage } from "@/utils/localstorage";
+import useAuth from "@/hooks/useAuth";
+import useSocket from "@/hooks/useSocket";
 
 const Login = () => {
   const toast = useToast();
   const [count, setCount] = React.useState(0);
   const ref: any = React.useRef();
+  const { setUserDetails, email } = useAuth();
+  const router = useRouter();
+  const { socket } = useSocket();
+
+  React.useEffect(() => {
+    console.log(router);
+
+    if (router.route === "/login" && email) {
+      router.push("/dashboard");
+    }
+  }, [router, email]);
 
   const {
     handleChange,
@@ -49,9 +57,16 @@ const Login = () => {
     onSubmit: (values) =>
       axios
         .post("/user/login", { ...values })
-        .then((res) => {
+        .then((res: any) => {
           saveToLocalStorage("token", res.data.token);
+          setUserDetails((prev) => ({
+            ...prev,
+            email: res.data.email,
+            id: res.data._id,
+          }));
           toast.success("success", `Logged in`);
+          socket?.emit("newUser", res.data.email);
+          router.push("/dashboard");
         })
         .catch((e) => {
           toast.failed("Failed", e?.response.data || "Internal server error");
@@ -61,15 +76,12 @@ const Login = () => {
   const handleMouseEnter = (error: any, handleSubmit: any) => {
     if (!dirty) handleSubmit();
     if (!Object.keys(error).length) {
-      console.log("i am here");
-      // countRef.current = 0;
       setCount(0);
       return;
     }
-    // countRef.current++;
+
     setCount((prev) => prev + 1);
 
-    // touched();
     const { justifyContent } = ref.current.style;
 
     if (justifyContent) {
@@ -80,22 +92,18 @@ const Login = () => {
     }
   };
 
-  console.log(count);
   const errMsg =
     "Ain't you tired my friend? why don't u try to fill the form properly?";
 
   return (
-    <Container
-      maxW="lg"
-      py={{ base: "12", md: "24" }}
-      px={{ base: "0", sm: "8" }}
-    >
+    <Container maxW="lg" height="100vh" overflow="scroll" width="100vw">
       <Stack spacing="8">
         <Stack
           display="flex"
           flexDirection="column"
           gap={6}
           alignItems="center"
+          width="100%"
         >
           <Avatar />
 
