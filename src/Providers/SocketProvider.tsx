@@ -27,8 +27,10 @@ const SocketProvider = ({ children }: IProps) => {
   const [socket, setSocket] = React.useState<any>(null);
 
   React.useEffect(() => {
-    const newSocket: any = io("http://localhost:5001");
+    const SOCKET_URL: any = process.env.NEXT_PUBLIC_BASE_SOCKET_URL;
+    const newSocket: any = io(SOCKET_URL);
     setSocket(newSocket);
+    console.log("socket connection established");
 
     return () => newSocket.disconnect();
   }, []);
