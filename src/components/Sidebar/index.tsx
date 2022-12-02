@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { Center, Flex, Box, useColorModeValue } from "@chakra-ui/react";
+import { Center, Flex, Box, useColorModeValue, Avatar } from "@chakra-ui/react";
 
 import { route } from "@/config/route";
 import useAuth from "@/hooks/useAuth";
@@ -36,7 +36,8 @@ const Sidebar = () => {
       }}
     >
       <Center minH="14" p="4" mb="2" flexDirection="column" flexShrink={0}>
-        <Box>Welcome</Box>
+        <Avatar />
+        <Box mt={3}>Welcome</Box>
         <Box>{email}</Box>
         <Box>ID : {turncateId(id, 4)}</Box>
       </Center>

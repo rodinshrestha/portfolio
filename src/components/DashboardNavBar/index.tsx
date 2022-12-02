@@ -12,6 +12,7 @@ import {
 import { RiNotification3Fill } from "react-icons/ri";
 
 import useSocket from "@/hooks/useSocket";
+import { notificationSound } from "@/utils/notification-sound";
 
 import ThemeToggle from "../ThemeToggle";
 
@@ -25,9 +26,10 @@ const DashboardNavbar = () => {
   const { socket } = useSocket();
 
   React.useEffect(() => {
-    socket?.on("getNotification", (msg: any) =>
-      setNotification((prev: any) => [...prev, msg])
-    );
+    socket?.on("getNotification", (msg: any) => {
+      setNotification((prev: any) => [...prev, msg]);
+      notificationSound();
+    });
 
     return () => socket?.off();
   }, [socket]);

@@ -101,69 +101,71 @@ const Login = () => {
     "Ain't you tired my friend? why don't u try to fill the form properly?";
 
   return (
-    <Container maxW="lg" height="100vh" overflow="scroll" width="100vw">
-      <Stack spacing="8">
-        <Stack
-          display="flex"
-          flexDirection="column"
-          gap={6}
-          alignItems="center"
-          width="100%"
-        >
-          <Avatar />
+    <Box display="flex" alignItems="center" height="100vh" overflow={"auto"}>
+      <Container>
+        <Stack spacing="8">
+          <Stack
+            display="flex"
+            flexDirection="column"
+            gap={6}
+            alignItems="center"
+            width="100%"
+          >
+            <Avatar />
 
-          <Heading>{count > 5 ? errMsg : "welcome"}</Heading>
+            <Heading>{count > 5 ? errMsg : "welcome"}</Heading>
+          </Stack>
+          <Box
+            py={{ base: "0", sm: "8" }}
+            px={{ base: "4", sm: "10" }}
+            bg={useBreakpointValue({ base: "transparent", sm: "bg-surface" })}
+            boxShadow={{ base: "none", sm: useColorModeValue("md", "md-dark") }}
+            borderRadius={{ base: "none", sm: "xl" }}
+          >
+            <form onSubmit={handleSubmit}>
+              <Stack spacing="5">
+                <Input
+                  name="email"
+                  label="email"
+                  type="text"
+                  error={errors.email}
+                  value={values.email}
+                  onChange={handleChange}
+                  touched={touched.email}
+                  dirty={!values.email ? true : dirty}
+                />
+                <Input
+                  name="password"
+                  label="password"
+                  type="text"
+                  error={errors.password}
+                  value={values.password}
+                  onChange={handleChange}
+                  touched={touched.password}
+                  dirty={!values.password ? true : dirty}
+                />
+              </Stack>
+              <Box display="flex" justifyContent="flex-end" ref={ref}>
+                <Button
+                  isLoading={isSubmitting}
+                  borderRadius={0}
+                  type="submit"
+                  variant="solid"
+                  colorScheme="teal"
+                  width="50%"
+                  onMouseEnter={() => handleMouseEnter(errors, handleSubmit)}
+                  loadingText="Loggingin..."
+                  disabled={isSubmitting}
+                  mt={6}
+                >
+                  Login
+                </Button>
+              </Box>
+            </form>
+          </Box>
         </Stack>
-        <Box
-          py={{ base: "0", sm: "8" }}
-          px={{ base: "4", sm: "10" }}
-          bg={useBreakpointValue({ base: "transparent", sm: "bg-surface" })}
-          boxShadow={{ base: "none", sm: useColorModeValue("md", "md-dark") }}
-          borderRadius={{ base: "none", sm: "xl" }}
-        >
-          <form onSubmit={handleSubmit}>
-            <Stack spacing="5">
-              <Input
-                name="email"
-                label="email"
-                type="text"
-                error={errors.email}
-                value={values.email}
-                onChange={handleChange}
-                touched={touched.email}
-                dirty={!values.email ? true : dirty}
-              />
-              <Input
-                name="password"
-                label="password"
-                type="text"
-                error={errors.password}
-                value={values.password}
-                onChange={handleChange}
-                touched={touched.password}
-                dirty={!values.password ? true : dirty}
-              />
-            </Stack>
-            <Box display="flex" justifyContent="flex-end" ref={ref}>
-              <Button
-                isLoading={isSubmitting}
-                borderRadius={0}
-                type="submit"
-                variant="solid"
-                colorScheme="teal"
-                width="50%"
-                onMouseEnter={() => handleMouseEnter(errors, handleSubmit)}
-                loadingText="Loggingin..."
-                disabled={isSubmitting}
-                mt={6}
-              >
-                Login
-              </Button>
-            </Box>
-          </form>
-        </Box>
-      </Stack>
-    </Container>
+      </Container>
+    </Box>
   );
 };
 
