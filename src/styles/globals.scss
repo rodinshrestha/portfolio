@@ -1,4 +1,4 @@
-@import './fonts';
+@import "./fonts";
 
 @tailwind base;
 @tailwind components;
@@ -22,7 +22,7 @@
 }
 
 .text_animation {
-  animation: 'rubberBand' 1s !important;
+  animation: "rubberBand" 1s !important;
 }
 
 @keyframes fadeIns {
@@ -36,4 +36,11 @@
 
 .my_container {
   padding: 10px 50px !important;
+}
+
+.side-bar {
+  // display: none !important;
+  @media (max-width: 580px) {
+    display: none !important;
+  }
 }

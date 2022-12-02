@@ -50,7 +50,18 @@ const DashboardNavbar = () => {
     >
       <ThemeToggle />
       <Menu>
-        <MenuButton as={"button"} border="1px solid black">
+        <MenuButton
+          as={"button"}
+          border="1px solid black"
+          px={4}
+          py={2}
+          transition="all 0.2s"
+          borderRadius="md"
+          borderWidth="1px"
+          _hover={{ bg: "gray.400" }}
+          _expanded={{ bg: "blue.400" }}
+          _focus={{ boxShadow: "outline" }}
+        >
           <Box position="relative">
             <Box
               padding={2}

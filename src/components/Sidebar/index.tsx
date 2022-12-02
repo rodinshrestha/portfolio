@@ -34,6 +34,7 @@ const Sidebar = () => {
         base: "translateX(0)",
         md: "none",
       }}
+      className="side-bar"
     >
       <Center minH="14" p="4" mb="2" flexDirection="column" flexShrink={0}>
         <Avatar />
