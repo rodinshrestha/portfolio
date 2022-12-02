@@ -28,6 +28,7 @@ const MessageBox = () => {
   }, [email]);
 
   const handleSendMessage = () => {
+    console.log(selectedUser);
     if (!selectedUser.email) return;
     console.log(socket);
 
@@ -42,8 +43,8 @@ const MessageBox = () => {
     <Box display="flex" flexDirection="column" gap={6}>
       List of availabe users
       <Select
-        onChange={({ value }: any) =>
-          setSelectedUser((prev) => ({ ...prev, email: value }))
+        onChange={(e: any) =>
+          setSelectedUser((prev) => ({ ...prev, email: e.target.value }))
         }
         placeholder="Select a user"
       >
