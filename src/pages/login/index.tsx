@@ -64,12 +64,17 @@ const Login = () => {
             email: res.data.email,
             id: res.data._id,
           }));
+          console.log({ res });
           toast.success("success", `Logged in`);
           socket?.emit("newUser", res.data.email);
           router.push("/dashboard");
         })
         .catch((e) => {
-          toast.failed("Failed", e?.response.data || "Internal server error");
+          // console.log(e);
+          toast.failed(
+            "Failed",
+            e?.response.data.message || "Internal server error"
+          );
         }),
   });
 

@@ -27,8 +27,14 @@ const SocketProvider = ({ children }: IProps) => {
   const [socket, setSocket] = React.useState<any>(null);
 
   React.useEffect(() => {
-    const SOCKET_URL: any = process.env.NEXT_PUBLIC_BASE_SOCKET_URL;
-    const newSocket: any = io(SOCKET_URL);
+    const SOCKET_URL: any = process.env.NEXT_PUBLIC_BASE_URL;
+    const connectionOptions: any = {
+      "force new connection": true,
+      reconnectionAttempts: "Infinity",
+
+      transports: ["websocket"],
+    };
+    const newSocket: any = io(SOCKET_URL, connectionOptions);
     setSocket(newSocket);
     console.log("socket connection established");
 
