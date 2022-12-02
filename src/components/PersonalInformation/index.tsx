@@ -5,6 +5,9 @@ import { ArrowDownIcon } from "@chakra-ui/icons";
 
 import { infoArray, nameArray, designation } from "@/utils/personalInformation";
 import Tags from "@/components/Tags";
+import useToast from "@/hooks/useToast";
+import { downloadResume } from "@/utils/downloadResume";
+import { CV_URL } from "@/constants/cv";
 
 import AnimatedLetter from "../AnimatedLetters";
 
@@ -12,6 +15,19 @@ import { StyledDiv } from "./style";
 
 const PersonalInformation = () => {
   const { colorMode } = useColorMode();
+  const toast = useToast();
+
+  const handleDownload = (url: string) => {
+    const keyWord = window.prompt(
+      "Security code is required to download resume"
+    );
+
+    if (keyWord !== "7142") {
+      toast.failed("Failed", "code is incorrect");
+      return;
+    }
+    downloadResume(url);
+  };
 
   return (
     <Tags>
@@ -47,8 +63,8 @@ const PersonalInformation = () => {
             iconSpacing={4}
             _hover={{ bgColor: "none" }}
             className="download-btn"
-            href="/assets/my-cv.pdf"
-            download
+            // href="/assets/my-cv.pdf"
+            onClick={() => handleDownload(CV_URL)}
           >
             Resume
           </Button>

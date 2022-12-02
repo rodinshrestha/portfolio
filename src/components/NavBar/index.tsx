@@ -12,12 +12,30 @@ import { FaLinkedin, FaGithubAlt, FaDownload } from "react-icons/fa";
 import { GrMail } from "react-icons/gr";
 
 import IconButton from "@/components/IconButton";
+import { downloadResume } from "@/utils/downloadResume";
+import useToast from "@/hooks/useToast";
+import { CV_URL } from "@/constants/cv";
 
 import ThemeToggle from "../ThemeToggle";
 import Logo from "../Logo";
 
 const Navbar = () => {
   const { colorMode } = useColorMode();
+  const toast = useToast();
+
+  const handleDownloadCv = () => {
+    const keyWord = window.prompt(
+      "Security code is required to download resume"
+    );
+
+    if (keyWord !== "7142") {
+      toast.failed("Failed", "code is incorrect");
+      return;
+    }
+
+    downloadResume(CV_URL);
+  };
+
   return (
     <Box
       position="fixed"
@@ -76,8 +94,9 @@ const Navbar = () => {
           >
             <IconButton
               icon={<FaDownload />}
-              href="/assets/my-cv.pdf"
-              download
+              href="#"
+              newPage={false}
+              onClick={handleDownloadCv}
             />
           </Tooltip>
           <Tooltip
