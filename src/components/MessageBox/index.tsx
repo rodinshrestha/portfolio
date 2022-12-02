@@ -1,6 +1,6 @@
 import React from "react";
-import Select from "react-select";
-import { Textarea, Box, Button } from "@chakra-ui/react";
+// import Select from "react-select";
+import { Textarea, Box, Button, Select } from "@chakra-ui/react";
 
 import { fetchAllUsers } from "@/http/users";
 import useSocket from "@/hooks/useSocket";
@@ -19,14 +19,18 @@ const MessageBox = () => {
     fetchAllUsers()
       .then((res) =>
         setUserList(
-          res.data.map((x: any) => ({ label: x.email, value: x.email }))
+          res.data
+            .map((x: any) => ({ label: x.email, value: x.email }))
+            .filter((x: any) => x.value !== email)
         )
       )
       .catch((err) => console.log(err));
-  }, []);
+  }, [email]);
 
   const handleSendMessage = () => {
+    if (!selectedUser.email) return;
     console.log(socket);
+
     socket?.emit("sendNotification", {
       senderName: email,
       receiverName: selectedUser.email,
@@ -38,11 +42,19 @@ const MessageBox = () => {
     <Box display="flex" flexDirection="column" gap={6}>
       List of availabe users
       <Select
-        options={userList}
         onChange={({ value }: any) =>
           setSelectedUser((prev) => ({ ...prev, email: value }))
         }
-      />
+        placeholder="Select a user"
+      >
+        {userList.map((x: any, i: number) => {
+          return (
+            <option value={x.value} key={i}>
+              {x.label}
+            </option>
+          );
+        })}
+      </Select>
       <Box>
         <Box mb={2}>Write your msg here</Box>
         <Textarea
@@ -57,10 +69,10 @@ const MessageBox = () => {
         borderRadius={0}
         type="submit"
         variant="solid"
-        colorScheme="teal"
         width="50%"
         loadingText="Loggingin..."
         onClick={handleSendMessage}
+        colorScheme="teal"
       >
         Send Message
       </Button>

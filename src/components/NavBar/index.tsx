@@ -29,8 +29,6 @@ const Navbar = () => {
     >
       <Container
         display="flex"
-        // px={20}
-        // py={2}
         className="my_container"
         flexWrap="wrap"
         justifyContent="space-between"
@@ -40,9 +38,6 @@ const Navbar = () => {
         <Flex align="center" mr={5} flexGrow={1}>
           <Heading as="h1" size="md">
             <Logo />
-            {/* {name.map((char, i) => (
-              <AnimatedLetter char={char} key={i} idx={1 + i} />
-            ))} */}
           </Heading>
         </Flex>
 
@@ -93,30 +88,6 @@ const Navbar = () => {
             <ThemeToggle />
           </Tooltip>
         </Stack>
-        {/* <Box
-          flex={1}
-          alignItems="right"
-          display={{ base: 'flex', md: 'none' }}
-          justifyContent="flex-end">
-          <Box ml={2}>
-            <Menu>
-              <MenuButton
-                as={IconButton}
-                icon={<HamburgerIcon />}
-                variant="outline"
-                aria-label="Options"
-              />
-              <MenuList>
-                <MenuItem>
-                  <IconButton icon={<FaLinkedin />} />
-                </MenuItem>
-                <MenuItem>
-                  <ThemeToggle />
-                </MenuItem>
-              </MenuList>
-            </Menu>
-          </Box>
-        </Box> */}
       </Container>
     </Box>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { Center, Flex, Box } from "@chakra-ui/react";
+import { Center, Flex, Box, useColorModeValue } from "@chakra-ui/react";
 
 import { route } from "@/config/route";
 import useAuth from "@/hooks/useAuth";
@@ -11,6 +11,7 @@ import { removeLocalStorage } from "@/utils/local-storage";
 const Sidebar = () => {
   const { pathname, push } = useRouter();
   const { email, id, setUserDetails } = useAuth();
+  const bgColor = useColorModeValue("#ffffff40", "#1A202C");
 
   const handleLogout = () => {
     removeLocalStorage("token");
@@ -20,16 +21,14 @@ const Sidebar = () => {
 
   return (
     <Flex
-      // position="fixed"
       shadow="sm"
       w="72"
-      bg="purple.900"
+      bg={bgColor}
       flexDirection="column"
-      bgGradient="linear(to-br, green.500, blue.700)"
       height="100%"
       overflowY="auto"
-      textColor="white"
       zIndex="30"
+      borderRight="1px solid rgba(255, 255, 255, 0.16)"
       transition="transform 0.1s"
       transform={{
         base: "translateX(0)",
@@ -52,7 +51,7 @@ const Sidebar = () => {
                   minH="12"
                   alignItems="center"
                   _hover={{ color: "white", bg: "blackAlpha.300" }}
-                  textColor={activeTab ? "white" : "whiteAlpha.800"}
+                  textColor={activeTab ? "white" : "inherit"}
                   bgColor={activeTab ? "blackAlpha.500" : "transparent"}
                   px="4"
                   borderRadius="lg"
@@ -70,11 +69,8 @@ const Sidebar = () => {
               minH="12"
               alignItems="center"
               _hover={{ color: "white", bg: "blackAlpha.300" }}
-              textColor={activeTab ? "white" : "whiteAlpha.800"}
-              bgColor={activeTab ? "blackAlpha.500" : "transparent"}
               px="4"
               borderRadius="lg"
-              _activeLink={{ bg: "blackAlpha.500", textColor: "white" }}
               key={i}
               onClick={handleLogout}
               cursor="pointer"
@@ -91,44 +87,3 @@ const Sidebar = () => {
   );
 };
 export default Sidebar;
-
-// (
-//   <Flex
-//     minH="12"
-//     alignItems="center"
-//     _hover={{ color: "white", bg: "blackAlpha.300" }}
-//     textColor={activeTab ? "white" : "whiteAlpha.800"}
-//     bgColor={activeTab ? "blackAlpha.500" : "transparent"}
-//     px="4"
-//     borderRadius="lg"
-//     _activeLink={{ bg: "blackAlpha.500", textColor: "white" }}
-//     key={i}
-//   >
-//     <Center fontSize="xl" mr="3">
-//       {x.icon}
-//     </Center>
-//     {x.label}
-//   </Flex>
-// );
-
-{
-  /* <Link href={x.link} key={i}>
-              <a>
-                <Flex
-                  minH="12"
-                  alignItems="center"
-                  _hover={{ color: "white", bg: "blackAlpha.300" }}
-                  textColor={activeTab ? "white" : "whiteAlpha.800"}
-                  bgColor={activeTab ? "blackAlpha.500" : "transparent"}
-                  px="4"
-                  borderRadius="lg"
-                  _activeLink={{ bg: "blackAlpha.500", textColor: "white" }}
-                >
-                  <Center fontSize="xl" mr="3">
-                    {x.icon}
-                  </Center>
-                  {x.label}
-                </Flex>
-              </a>
-            </Link> */
-}

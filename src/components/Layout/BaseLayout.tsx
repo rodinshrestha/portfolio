@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, useColorModeValue } from "@chakra-ui/react";
 import React from "react";
 import Router from "next/router";
 
@@ -13,6 +13,8 @@ interface IProps {
 
 const BaseLayout = ({ children }: IProps) => {
   const { email, loader } = useAuth();
+
+  const bgColor = useColorModeValue("#ffffff40", "#1A202C");
 
   React.useEffect(() => {
     if (!email && !loader) {
@@ -31,9 +33,8 @@ const BaseLayout = ({ children }: IProps) => {
         <Box
           as="div"
           overflowY="auto"
-          bg="white"
           height="100%"
-          color="black"
+          bg={bgColor}
           p={{
             base: 6,
             sm: 6,
