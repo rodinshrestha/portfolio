@@ -6,6 +6,7 @@ import Head from "next/head";
 
 import AuthProvider from "@/Providers/AuthProvider";
 import SocketProvider from "@/Providers/SocketProvider";
+import ConfigProvider from "@/Providers/ConfigProvider";
 // import useSocket from "@/hooks/useSocket";
 
 import theme from "../../theme";
@@ -20,9 +21,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <SocketProvider>
         <AuthProvider>
-          <ChakraProvider theme={theme}>
-            <Component {...pageProps} />
-          </ChakraProvider>
+          <ConfigProvider>
+            <ChakraProvider theme={theme}>
+              <Component {...pageProps} />
+            </ChakraProvider>
+          </ConfigProvider>
         </AuthProvider>
       </SocketProvider>
     </>

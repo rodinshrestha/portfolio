@@ -1,13 +1,16 @@
 import React from "react";
 // import Select from "react-select";
 import { Textarea, Box, Button, Select } from "@chakra-ui/react";
+import Axios from "axios";
 
 import { fetchAllUsers } from "@/http/users";
 import useSocket from "@/hooks/useSocket";
 import useAuth from "@/hooks/useAuth";
+import { createNotification } from "@/http/notification";
 
 const MessageBox = () => {
   const [userList, setUserList] = React.useState([]);
+  const [loader, setLoader] = React.useState(false);
   const [selectedUser, setSelectedUser] = React.useState({
     email: null,
     msg: "",
@@ -16,7 +19,9 @@ const MessageBox = () => {
   const { email } = useAuth();
 
   React.useEffect(() => {
-    fetchAllUsers()
+    const source = Axios.CancelToken.source();
+
+    fetchAllUsers(source)
       .then((res) =>
         setUserList(
           res.data
@@ -25,18 +30,35 @@ const MessageBox = () => {
         )
       )
       .catch((err) => console.log(err));
+
+    return () => {
+      source.cancel();
+    };
   }, [email]);
 
   const handleSendMessage = () => {
-    console.log(selectedUser);
     if (!selectedUser.email) return;
-    console.log(socket);
+    setLoader(true);
 
-    socket?.emit("sendNotification", {
-      senderName: email,
-      receiverName: selectedUser.email,
-      msg: selectedUser.msg,
-    });
+    const data = {
+      message: selectedUser.msg,
+      receiver_email: selectedUser.email,
+      sender_email: email,
+    };
+
+    createNotification(data)
+      .then(() => {
+        socket?.emit("sendNotification", {
+          senderName: email,
+          receiverName: selectedUser.email,
+          msg: selectedUser.msg,
+        });
+        setLoader(false);
+      })
+      .catch((err) => {
+        setLoader(false);
+        console.log(err);
+      });
   };
 
   return (
@@ -68,10 +90,11 @@ const MessageBox = () => {
       </Box>
       <Button
         borderRadius={0}
+        isLoading={loader}
+        loadingText="Sending..."
         type="submit"
         variant="solid"
         width="50%"
-        loadingText="Loggingin..."
         onClick={handleSendMessage}
         colorScheme="teal"
       >

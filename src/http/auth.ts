@@ -1,4 +1,5 @@
 import axios from "@/utils/axios";
-const auth = () => axios.get("/user/auth");
+const auth = (Source: any) =>
+  axios.get("/user/auth", { cancelToken: Source.token });
 
 export default auth;

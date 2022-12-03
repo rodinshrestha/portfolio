@@ -1,4 +1,5 @@
 import React from "react";
+import Axios from "axios";
 
 import { getLocalStorage } from "@/utils/local-storage";
 import auth from "@/http/auth";
@@ -37,8 +38,9 @@ const AuthProvider = ({ children }: IProps) => {
   React.useEffect(() => {
     const token = getLocalStorage("token");
     if (token) {
+      const source = Axios.CancelToken.source();
       setUserDetails((prev) => ({ ...prev, loader: true }));
-      auth()
+      auth(source)
         .then((res: any) => {
           setUserDetails({
             email: res.data.email,
@@ -48,6 +50,10 @@ const AuthProvider = ({ children }: IProps) => {
           socket?.emit("newUser", res.data.email);
         })
         .catch(() => setUserDetails((prev) => ({ ...prev, loader: false })));
+
+      return () => {
+        source.cancel();
+      };
     }
   }, [socket]);
 

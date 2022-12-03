@@ -13,11 +13,14 @@ import { RiNotification3Fill } from "react-icons/ri";
 
 import useSocket from "@/hooks/useSocket";
 import { notificationSound } from "@/utils/notification-sound";
+import useConfig from "@/hooks/useConfig";
 
 import ThemeToggle from "../ThemeToggle";
 
 const DashboardNavbar = () => {
-  const [notification, setNotification] = React.useState<any>([]);
+  const [recentNotificationCount, setRecentNotificationCount] =
+    React.useState<number>(0);
+  const { data, setData } = useConfig();
 
   const bgColor = useColorModeValue("#ffffff40", "#1A202C");
   const iconBgColor = useColorModeValue("#1A202c", "white");
@@ -26,15 +29,24 @@ const DashboardNavbar = () => {
   const { socket } = useSocket();
 
   React.useEffect(() => {
-    socket?.on("getNotification", (msg: any) => {
-      setNotification((prev: any) => [...prev, msg]);
+    socket?.on("getNotification", ({ msg }: any) => {
+      setData((prev: any) => ({
+        ...prev,
+        notification: [
+          ...prev.notification,
+          {
+            sender_email: msg.senderName,
+            receiver_email: msg.receiverName,
+            message: msg.msg,
+          },
+        ],
+      }));
+      setRecentNotificationCount((prev) => ++prev);
       notificationSound();
     });
 
     return () => socket?.off();
-  }, [socket]);
-
-  console.log(notification);
+  }, [socket, setData]);
 
   return (
     <Flex
@@ -52,15 +64,13 @@ const DashboardNavbar = () => {
       <Menu>
         <MenuButton
           as={"button"}
-          border="1px solid black"
           px={4}
           py={2}
           transition="all 0.2s"
-          borderRadius="md"
-          borderWidth="1px"
           _hover={{ bg: "gray.400" }}
-          _expanded={{ bg: "blue.400" }}
-          _focus={{ boxShadow: "outline" }}
+          // _expanded={{ bg: "blue.400" }}
+          // _focus={{ boxShadow: "outline" }}
+          onClick={() => setRecentNotificationCount(0)}
         >
           <Box position="relative">
             <Box
@@ -71,7 +81,7 @@ const DashboardNavbar = () => {
             >
               <RiNotification3Fill size="22px" />
             </Box>
-            {notification.length ? (
+            {recentNotificationCount > 0 ? (
               <Box
                 position="absolute"
                 top="-11px"
@@ -88,26 +98,25 @@ const DashboardNavbar = () => {
                 borderRadius="50%"
                 color="white"
               >
-                {notification.length}
+                {recentNotificationCount}
               </Box>
             ) : null}
           </Box>
         </MenuButton>
 
-        <MenuList>
-          {notification.length ? (
-            notification.map((list: any, i: number) => {
-              console.log(notification.length, i);
+        <MenuList maxHeight="600px" overflow="auto">
+          {data.notification.length ? (
+            data.notification.map((list: any, i: number) => {
               return (
-                <>
-                  <MenuItem key={i}>
+                <Box key={i}>
+                  <MenuItem>
                     <Box>
-                      <Box>{list.msg.senderName} sents you the message.</Box>
-                      <Box>{list.msg.msg}</Box>
+                      <Box>{list.sender_email} sents you the message.</Box>
+                      <Box>{list.message}</Box>
                     </Box>
                   </MenuItem>
-                  {notification.length !== i + 1 && <MenuDivider />}
-                </>
+                  {data.notification.length !== i + 1 && <MenuDivider />}
+                </Box>
               );
             })
           ) : (
